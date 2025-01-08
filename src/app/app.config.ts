@@ -1,22 +1,33 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { StyleClassModule } from 'primeng/styleclass';
-import { MessageService } from 'primeng/api';
-import { providePrimeNG } from 'primeng/config';
-import Aura from '@primeng/themes/aura';
+import {
+  BrowserAnimationsModule,
+  provideAnimations,
+} from '@angular/platform-browser/animations';
+import {
+  provideRouter,
+  withComponentInputBinding,
+  withInMemoryScrolling,
+} from '@angular/router';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }),
+    /* provideZoneChangeDetection({ eventCoalescing: true }),
     provideAnimationsAsync(),
-    BrowserAnimationsModule,
-    StyleClassModule,
-    MessageService,
-    providePrimeNG({
-      theme: {
-        preset: Aura,
-      },
-    }),
+    BrowserAnimationsModule, */
+    provideRouter(
+      routes,
+      withComponentInputBinding(),
+      withInMemoryScrolling({
+        anchorScrolling: 'enabled',
+        scrollPositionRestoration: 'enabled',
+      })
+    ),
+    provideAnimations(),
+    provideHttpClient(withInterceptors([])),
+    ReactiveFormsModule,
   ],
 };

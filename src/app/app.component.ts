@@ -1,18 +1,18 @@
-import { Component } from '@angular/core';
-import { MenuComponent } from './shared/components/menu/menu.component';
-import { PrimeNG } from 'primeng/config';
+import { Component, OnInit } from '@angular/core';
+import { initFlowbite } from 'flowbite';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [MenuComponent],
+  imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {
-  constructor(private readonly primeng: PrimeNG) {}
+export class AppComponent implements OnInit {
+  constructor() {}
 
-  ngOnInit() {
-    this.primeng.ripple.set(true);
+  ngOnInit(): void {
+    initFlowbite();
   }
 }

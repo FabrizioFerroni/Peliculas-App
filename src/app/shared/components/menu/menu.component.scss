@@ -1,0 +1,19 @@
+.active {
+  border-bottom: 0.15rem solid;
+  border-bottom-color: rgb(26 86 219 / var(--tw-border-opacity, 1));
+}
+
+nav a {
+  color: rgb(60 60 60 / var(--tw-text-opacity, 1));
+  transition: color 0.3s ease;
+}
+
+nav {
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
+  border-bottom: 0.15rem solid;
+  border-bottom-color: rgb(245 245 245 / var(--tw-border-opacity, 1));
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  z-index: 1000;
+}
