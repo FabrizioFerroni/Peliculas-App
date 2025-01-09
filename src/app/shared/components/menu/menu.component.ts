@@ -18,6 +18,10 @@ export class MenuComponent implements OnInit {
   readonly rutaLogin = Rutas.LOGIN;
   readonly rutaTablero = `${Rutas.APP}`;
   readonly titleSite = environment.name;
+  readonly generosRoute = Rutas.GENEROS;
+  readonly actoresRoute = Rutas.ACTORES;
+  readonly cinesRoute = Rutas.CINES;
+  readonly crearPeliculasRoute = Rutas.PELICULA_NUEVO;
 
   ngOnInit() {}
 }
