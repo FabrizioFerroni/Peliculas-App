@@ -1,7 +1,37 @@
 .contenedor-pelicula {
-  border: 1px solid black;
+  border: 0.0625rem solid black;
   margin-bottom: 1rem;
   padding: 1rem;
   border-radius: 0.5rem;
   margin-top: 1rem;
+}
+
+.peliculas-contenedor {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+}
+
+.pelicula-contenedor {
+  margin-right: 2%;
+  margin-bottom: 0.625rem;
+  text-align: center;
+
+  &__info {
+    padding-top: 0.625rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+  }
+}
+
+p {
+  max-width: 14.0625rem;
+  font-size: 0.9375rem;
+  font-weight: bold;
+}
+
+button {
+  margin-left: 1rem;
 }

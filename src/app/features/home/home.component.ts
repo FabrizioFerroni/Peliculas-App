@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuComponent } from '@app/shared/components/menu/menu.component';
 import { ListadoPeliculasComponent } from '../peliculas/listado-peliculas/listado-peliculas.component';
 import { IPelicula } from '@app/shared/types/peliculas.interface';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [MenuComponent, ListadoPeliculasComponent],
+  imports: [ListadoPeliculasComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
