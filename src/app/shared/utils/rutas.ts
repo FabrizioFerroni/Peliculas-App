@@ -21,6 +21,8 @@ export enum Rutas {
 
   PELICULA_NUEVO = 'peliculas/crear',
 
+  PELICULA_FILTROS = 'peliculas/filtrar',
+
   PELICULA_EDITAR = 'peliculas/editar/:id',
 
   NOT_FOUND = '**',

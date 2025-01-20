@@ -1,3 +1,11 @@
-<p>
-  El id del actor a editar es: <b>{{ id }}</b>
-</p>
+<div
+  class="w-full max-w-sm mx-auto mt-10 p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700"
+>
+  <h5 class="text-xl font-medium text-gray-900 dark:text-white mb-6">
+    Editar Actor ( {{ id }})
+  </h5>
+  <app-formulario-actores
+    [dto]="actor"
+    (posteoActor)="guardarCambios($event)"
+  />
+</div>

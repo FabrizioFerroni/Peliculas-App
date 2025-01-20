@@ -15,6 +15,7 @@ export class MenuComponent implements OnInit {
   showConfigs = false;
   isLoggedIn = false;
   readonly homeRoute = Rutas.HOME;
+  readonly filterRoute = Rutas.PELICULA_FILTROS;
   readonly rutaLogin = Rutas.LOGIN;
   readonly rutaTablero = `${Rutas.APP}`;
   readonly titleSite = environment.name;

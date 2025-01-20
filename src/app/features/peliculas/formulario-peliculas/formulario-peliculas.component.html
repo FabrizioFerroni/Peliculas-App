@@ -1,0 +1,324 @@
+<form (submit)="guardarCambios()" [formGroup]="form">
+  <!-- datos -->
+  <div class="mb-5">
+    <label
+      for="titulo"
+      class="block mb-2 text-sm font-medium {{
+        getTituloFieldRequiredError || getTituloFieldFirstLetterUppercaseError
+          ? ' text-red-700 dark:text-red-500'
+          : ''
+      }}"
+      >Título de la película</label
+    >
+    <input
+      type="text"
+      required
+      id="titulo"
+      name="titulo"
+      formControlName="titulo"
+      class="block rounded-lg border mb-2 text-sm font-medium text-gray-900 dark:text-white w-full p-2.5 {{
+        getTituloFieldRequiredError || getTituloFieldFirstLetterUppercaseError
+          ? 'border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500  focus:border-red-500 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500'
+          : ''
+      }}"
+      placeholder="Rapido y Furioso 4"
+    />
+
+    @if(getTituloField){ @if(getTituloFieldRequiredError){
+    <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+      El titulo de la película es requerido
+    </p>
+    } @if(getTituloFieldFirstLetterUppercaseError){
+    <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+      El titulo de la película debe comenzar con una letra mayúscula
+    </p>
+    }}
+  </div>
+
+  <div class="mb-5">
+    <label
+      for="descripcion"
+      class="block mb-2 text-sm font-medium {{
+        getDescripcionFieldRequiredError ||
+        getDescripcionFieldFirstLetterUppercaseError
+          ? ' text-red-700 dark:text-red-500'
+          : ''
+      }}"
+      >Descripción de la película</label
+    >
+    <textarea
+      required
+      id="descripcion"
+      name="descripcion"
+      formControlName="descripcion"
+      rows="4"
+      style="resize: none"
+      class="block rounded-lg border mb-2 text-sm font-medium text-gray-900 dark:text-white w-full p-2.5 {{
+        getDescripcionFieldRequiredError ||
+        getDescripcionFieldFirstLetterUppercaseError
+          ? 'border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500  focus:border-red-500 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500'
+          : ''
+      }}"
+      placeholder=""
+    ></textarea>
+
+    @if(getDescripcionField){ @if(getDescripcionFieldRequiredError){
+    <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+      La descripción de la película es requerido
+    </p>
+    } @if(getDescripcionFieldFirstLetterUppercaseError){
+    <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+      La descripción de la película debe comenzar con una letra mayúscula
+    </p>
+    }}
+  </div>
+
+  <div class="mb-5">
+    <label for="trailer" class="block mb-2 text-sm font-medium"
+      >Trailer de la película</label
+    >
+    <input
+      type="text"
+      required
+      id="trailer"
+      name="trailer"
+      formControlName="trailer"
+      class="block rounded-lg border mb-2 text-sm font-medium text-gray-900 dark:text-white w-full p-2.5"
+      placeholder="https://www.youtube.com/watch?v=_ixlOH9EzL4&ab_channel=UniversalPicturesM%C3%A9xico"
+    />
+  </div>
+
+  <div class="mb-5">
+    <label
+      for="duracion"
+      class="block mb-2 text-sm font-medium {{
+        getDuracionFieldRequiredError ||
+        getDuracionFieldDurationNotNegativeError
+          ? ' text-red-700 dark:text-red-500'
+          : ''
+      }}"
+      >Duración de la película (Minutos)</label
+    >
+    <input
+      type="number"
+      required
+      id="duracion"
+      min="0"
+      step="10"
+      name="duracion"
+      formControlName="duracion"
+      class="block rounded-lg border mb-2 text-sm font-medium text-gray-900 dark:text-white w-full p-2.5 {{
+        getDuracionFieldRequiredError ||
+        getDuracionFieldDurationNotNegativeError
+          ? 'border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500  focus:border-red-500 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500'
+          : ''
+      }}"
+      placeholder="120"
+    />
+
+    @if(getDuracionField){ @if(getDuracionFieldRequiredError){
+    <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+      La duración de la película es requerido
+    </p>
+    } @if(getDuracionFieldDurationNotNegativeError){
+    <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+      La duración de la película debe ser un número entero positivo o mayor que
+      0
+    </p>
+    }}
+  </div>
+
+  <div class="mb-5">
+    <label
+      for="anio"
+      class="block mb-2 text-sm font-medium {{
+        getAnioFieldRequiredError ? ' text-red-700 dark:text-red-500' : ''
+      }}"
+      >Año que salió la película</label
+    >
+    <input
+      type="text"
+      required
+      id="anio"
+      name="anio"
+      formControlName="anio"
+      class="block rounded-lg border mb-2 text-sm font-medium text-gray-900 dark:text-white w-full p-2.5 {{
+        getAnioFieldRequiredError
+          ? 'border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500  focus:border-red-500 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500'
+          : ''
+      }}"
+      placeholder="2009"
+    />
+
+    @if(getAnioField){ @if(getAnioFieldRequiredError){
+    <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+      El año de la película es requerido
+    </p>
+    } }
+  </div>
+
+  <div class="mb-5">
+    <label
+      for="genero"
+      class="block mb-2 text-sm font-medium {{
+        getGenerosFieldRequiredError ? ' text-red-700 dark:text-red-500' : ''
+      }}"
+      >Géneros de la películas</label
+    >
+
+    <app-selector-multiple
+      [seleccionados]="generosSeleccionados"
+      [noSeleccionados]="generosNoSeleccionados"
+    />
+  </div>
+
+  <div class="mb-5">
+    <label for="cines" class="block mb-2 text-sm font-medium"
+      >Cines disponibles</label
+    >
+
+    <app-selector-multiple
+      [seleccionados]="cinesSeleccionados"
+      [noSeleccionados]="cinesNoSeleccionados"
+    />
+  </div>
+
+  <div class="mb-5">
+    <label
+      for="fechaLanzamiento"
+      class="block mb-2 text-sm font-medium {{
+        getFechaLanzamientoFieldRequiredError ||
+        getFechaLanzamientoFieldDateDoNotFutureError
+          ? ' text-red-700 dark:text-red-500'
+          : ''
+      }}"
+      >Fecha de Lanzamiento</label
+    >
+    <input
+      type="date"
+      required
+      id="fechaLanzamiento"
+      name="fechaLanzamiento"
+      formControlName="fechaLanzamiento"
+      [value]="dto?.fechaLanzamiento"
+      class="block rounded-lg border mb-2 text-sm font-medium text-gray-900 dark:text-white w-full p-2.5 {{
+        getFechaLanzamientoFieldRequiredError ||
+        getFechaLanzamientoFieldDateDoNotFutureError
+          ? 'border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500  focus:border-red-500 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500'
+          : ''
+      }}"
+      placeholder="1972/05/02"
+    />
+
+    @if(getFechaLanzamientoFieldErrors){
+    @if(getFechaLanzamientoFieldRequiredError){
+    <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+      La fecha de lanzamiento de la película es requerido
+    </p>
+    } @if(getFechaLanzamientoFieldDateDoNotFutureError){
+    <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+      La fecha de lanzamiento de la película no puede ser en el futuro
+    </p>
+    }}
+  </div>
+
+  <div class="mb-5">
+    <app-input-img
+      titulo="Foto de la película"
+      [urlImg]="dto?.poster"
+      (imgFile)="imgFile($event)"
+    />
+  </div>
+
+  <div class="mb-5">
+    <input
+      id="enCines"
+      type="checkbox"
+      value=""
+      name="enCines"
+      formControlName="enCines"
+      class="cursor-pointer w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600"
+    />
+    <label
+      for="enCines"
+      class="cursor-pointer ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+    >
+      En Cines
+    </label>
+  </div>
+
+  <div class="mb-5">
+    <input
+      id="proximosEstrenos"
+      type="checkbox"
+      value=""
+      name="proximosEstrenos"
+      formControlName="proximosEstrenos"
+      class="cursor-pointer w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded dark:bg-gray-700 dark:border-gray-600"
+    />
+    <label
+      for="proximosEstrenos"
+      class="cursor-pointer ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+    >
+      Próximo Estreno
+    </label>
+  </div>
+
+  <div class="mb-5">
+    <label
+      for="director"
+      class="block mb-2 text-sm font-medium {{
+        getDirectorFieldRequiredError ||
+        getDirectorFieldFirstLetterUppercaseError
+          ? ' text-red-700 dark:text-red-500'
+          : ''
+      }}"
+      >Director de la película</label
+    >
+    <input
+      type="text"
+      required
+      id="director"
+      name="director"
+      formControlName="director"
+      class="block rounded-lg border mb-2 text-sm font-medium text-gray-900 dark:text-white w-full p-2.5 {{
+        getDirectorFieldRequiredError ||
+        getDirectorFieldFirstLetterUppercaseError
+          ? 'border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500  focus:border-red-500 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500'
+          : ''
+      }}"
+      placeholder="James Cameron"
+    />
+
+    @if(getDirectorField){ @if(getDirectorFieldRequiredError){
+    <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+      El director de la película es requerido
+    </p>
+    } @if(getDirectorFieldFirstLetterUppercaseError){
+    <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+      El director de la película debe comenzar con una letra mayúscula
+    </p>
+    }}
+  </div>
+
+  <div class="mb-5">
+    <h4>Seleccione los actores</h4>
+    <app-autocomplete-actores [actoresSeleccionados]="actoresSeleccionados" />
+  </div>
+  <!-- botones -->
+  <div class="flex flex-col-reverse md:flex-row-reverse justify-between">
+    <button
+      class="flex flex-row gap-2 focus:outline-none disabled:bg-green-200 text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700"
+      type="submit"
+      [disabled]="form.invalid"
+    >
+      @if(dto?.titulo !== ''){ Editar película } @else { Crear película }
+    </button>
+    <a
+      class="flex flex-row gap-2 focus:outline-none text-white bg-gray-700 hover:bg-gray-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700"
+      routerLink="/{{ peliculaRoute }}"
+    >
+      Volver
+    </a>
+  </div>
+</form>
