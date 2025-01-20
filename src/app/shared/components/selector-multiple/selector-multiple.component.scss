@@ -1,0 +1,34 @@
+.contenedor {
+  display: flex;
+}
+ul {
+  height: 12.5rem;
+  overflow-y: auto;
+  list-style-type: none;
+  width: 10.625rem;
+  padding: 0;
+  border-radius: 0.1875rem;
+  border: 1px solid #cccccc;
+
+  li {
+    cursor: pointer;
+    border-bottom: 1px solid #eeeeee;
+    padding: 0.125rem 0.625rem;
+    font-size: 0.875rem;
+  }
+
+  li:hover {
+    background-color: #08c;
+  }
+}
+
+.botones {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0.3125rem;
+}
+
+button {
+  margin: 0.3125rem;
+}

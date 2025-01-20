@@ -1,0 +1,101 @@
+<form (submit)="guardarCambios()" [formGroup]="form" novalidate>
+  <div class="mb-5">
+    <label
+      for="nombre"
+      class="block mb-2 text-sm font-medium {{
+        getNombreFieldRequiredError || getNombreFieldFirstLetterUppercaseError
+          ? ' text-red-700 dark:text-red-500'
+          : ''
+      }}"
+      >Nombre del actor</label
+    >
+    <input
+      type="text"
+      required
+      id="nombre"
+      name="nombre"
+      formControlName="nombre"
+      class="block rounded-lg border mb-2 text-sm font-medium text-gray-900 dark:text-white w-full p-2.5 {{
+        getNombreFieldRequiredError || getNombreFieldFirstLetterUppercaseError
+          ? 'border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500  focus:border-red-500 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500'
+          : ''
+      }}"
+      placeholder="Dwayne Johnson"
+    />
+
+    @if(getNombreFieldErrors){ @if(getNombreFieldRequiredError){
+    <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+      El nombre del actor es requerido
+    </p>
+    } @if(getNombreFieldFirstLetterUppercaseError){
+    <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+      El nombre del actor debe comenzar con una letra mayúscula
+    </p>
+    }}
+  </div>
+
+  <div class="mb-5">
+    <label
+      for="fechaNacimiento"
+      class="block mb-2 text-sm font-medium {{
+        getFechaNacimientoFieldRequiredError ||
+        getFechaNacimientoFieldDateDoNotFutureError
+          ? ' text-red-700 dark:text-red-500'
+          : ''
+      }}"
+      >Fecha de Nacimiento</label
+    >
+    <input
+      type="date"
+      required
+      id="fechaNacimiento"
+      name="fechaNacimiento"
+      formControlName="fechaNacimiento"
+      [value]="dto?.fechaNacimiento"
+      class="block rounded-lg border mb-2 text-sm font-medium text-gray-900 dark:text-white w-full p-2.5 {{
+        getFechaNacimientoFieldRequiredError ||
+        getFechaNacimientoFieldDateDoNotFutureError
+          ? 'border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500  focus:border-red-500 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500'
+          : ''
+      }}"
+      placeholder="1972/05/02"
+    />
+    <!-- [value]="form.get('fechaNacimiento')?.value | date : 'dd/MM/yyyy'" -->
+    <!-- (change)="onDateChange($event)" -->
+
+    @if(getFechaNacimientoFieldErrors){
+    @if(getFechaNacimientoFieldRequiredError){
+    <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+      La fecha de nacimiento del actor es requerido
+    </p>
+    } @if(getFechaNacimientoFieldDateDoNotFutureError){
+    <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+      La fecha de nacimiento del actor no puede ser en el futuro
+    </p>
+    }}
+  </div>
+
+  <div class="mb-5">
+    <app-input-img
+      titulo="Foto del actor"
+      [urlImg]="dto?.foto"
+      (imgFile)="imgFile($event)"
+    />
+  </div>
+
+  <div class="flex flex-col-reverse md:flex-row-reverse justify-between">
+    <button
+      class="flex flex-row gap-2 focus:outline-none disabled:bg-green-200 text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700"
+      type="submit"
+      [disabled]="form.invalid"
+    >
+      @if(dto?.nombre !== ''){ Editar actor } @else { Crear actor }
+    </button>
+    <a
+      class="flex flex-row gap-2 focus:outline-none text-white bg-gray-700 hover:bg-gray-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700"
+      routerLink="/{{ actorRoute }}"
+    >
+      Volver
+    </a>
+  </div>
+</form>

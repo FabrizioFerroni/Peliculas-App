@@ -1,0 +1,95 @@
+<div class="relative w-full">
+  <form>
+    <!-- Input para el Autocomplete -->
+    <input
+      type="text"
+      placeholder="Seleccione los actores"
+      class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+      [value]="selectedActor?.nombre || ''"
+      (input)="onInputChange($event)"
+      (focus)="showDropdown = true"
+      (blur)="hideDropdown()"
+      [formControl]="control"
+    />
+
+    <!-- Dropdown de sugerencias -->
+    @if(showDropdown && filteredActors.length > 0){
+    <ul
+      class="absolute left-0 z-10 w-full bg-white border border-gray-200 rounded-lg shadow-md max-h-40 overflow-auto"
+    >
+      @for (actor of actores; track $index) {
+      <li
+        class="flex items-center px-4 py-2 cursor-pointer hover:bg-blue-100"
+        (click)="actorSeleccionado(actor)"
+      >
+        <img
+          [src]="actor.foto"
+          alt="Foto de {{ actor.nombre }}"
+          class="w-6 h-6 rounded-full mr-2"
+        />
+        <span>{{ actor.nombre }}</span>
+      </li>
+      }
+    </ul>
+    }
+    <!-- Tabla de Actores Seleccionados -->
+  </form>
+  @if(actoresSeleccionados.length > 0){
+  <div class="overflow-x-auto mt-3">
+    <table
+      class="min-w-full bg-white border border-gray-200 rounded-lg shadow-md"
+      cdkDropList
+      [cdkDropListData]="actoresSeleccionados"
+      (cdkDropListDropped)="finalizarArrastre($event)"
+    >
+      <thead class="bg-gray-100">
+        <tr>
+          <th class="px-4 py-2 text-left">Imagen</th>
+          <th class="px-4 py-2 text-left">Nombre</th>
+          <th class="px-4 py-2 text-left">Personaje</th>
+          <th class="px-4 py-2 text-center">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for(actor of actoresSeleccionados; track $index){
+        <tr cdkDrag [cdkDragData]="actor" class="hover:bg-gray-100">
+          <!-- Imagen -->
+          <td class="px-4 py-2">
+            <img
+              [src]="actor.foto"
+              alt="{{ actor.nombre }}"
+              class="w-12 h-12 rounded-lg"
+            />
+          </td>
+          <!-- Nombre -->
+          <td class="px-4 py-2">{{ actor.nombre }}</td>
+          <!-- Personaje -->
+          <td class="px-4 py-2">
+            <div>
+              <label class="block text-sm font-medium text-gray-700"
+                >Personaje</label
+              >
+              <input
+                type="text"
+                [(ngModel)]="actor.personaje"
+                class="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+          </td>
+          <!-- Acciones -->
+          <td class="px-4 py-2 text-center">
+            <button
+              class="p-2 text-red-600 hover:text-red-800"
+              (click)="eliminar(actor.id)"
+              aria-label="Eliminar"
+            >
+              ✖
+            </button>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  }
+</div>

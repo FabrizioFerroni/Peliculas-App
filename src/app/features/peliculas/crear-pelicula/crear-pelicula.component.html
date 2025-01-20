@@ -1,1 +1,15 @@
-<p>crear-pelicula works!</p>
+<div
+  class="w-full max-w-lg mx-auto mt-10 p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700"
+>
+  <h5 class="text-xl font-medium text-gray-900 dark:text-white mb-6">
+    Crear Nueva Película
+  </h5>
+  <app-formulario-peliculas
+    (posteoFormulario)="guardarCambios($event)"
+    [generosNoSeleccionados]="generosNoSeleccionados"
+    [generosSeleccionados]="generosSeleccionados"
+    [cinesSeleccionados]="cinesSeleccionados"
+    [cinesNoSeleccionados]="cinesNoSeleccionados"
+    [actoresSeleccionados]="actoresSeleccionados"
+  />
+</div>

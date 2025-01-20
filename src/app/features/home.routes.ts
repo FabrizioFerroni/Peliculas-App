@@ -56,6 +56,12 @@ export default [
   },
 
   {
+    path: Rutas.PELICULA_FILTROS,
+    loadComponent: () =>
+      import('./peliculas/filtro-peliculas/filtro-peliculas.component'),
+  },
+
+  {
     path: Rutas.PELICULA_NUEVO,
     loadComponent: () =>
       import('./peliculas/crear-pelicula/crear-pelicula.component'),
