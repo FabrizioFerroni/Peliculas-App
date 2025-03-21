@@ -1,8 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActorAutoCompleteDTO } from '../dto/actores.dto';
 import { CommonModule } from '@angular/common';
 import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
+import { ActoresService } from '../service/actores.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-autocomplete-actores',
@@ -11,28 +13,10 @@ import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
   templateUrl: './autocomplete-actores.component.html',
   styleUrl: './autocomplete-actores.component.scss',
 })
-export class AutocompleteActoresComponent {
+export class AutocompleteActoresComponent implements OnInit {
+  actoresService: ActoresService = inject(ActoresService);
   control = new FormControl();
-  actores: ActorAutoCompleteDTO[] = [
-    {
-      id: '1',
-      nombre: 'Actor 1',
-      personaje: '',
-      foto: 'https://images.unsplash.com/photo-1468857006728-bba1dba0eb7f?q=80&w=2049&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    },
-    {
-      id: '2',
-      nombre: 'Actor 2',
-      personaje: '',
-      foto: 'https://images.unsplash.com/photo-1468857006728-bba1dba0eb7f?q=80&w=2049&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    },
-    {
-      id: '3',
-      nombre: 'Actor 3',
-      personaje: '',
-      foto: 'https://images.unsplash.com/photo-1468857006728-bba1dba0eb7f?q=80&w=2049&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    },
-  ];
+  actores: ActorAutoCompleteDTO[] = [];
 
   filteredActors = this.actores;
   selectedActor: ActorAutoCompleteDTO | null = null;
@@ -42,7 +26,20 @@ export class AutocompleteActoresComponent {
   @Input({ required: true })
   actoresSeleccionados: ActorAutoCompleteDTO[] = [];
 
-  // test
+  ngOnInit(): void {
+    this.control.valueChanges.subscribe((value) => {
+      if (typeof value === 'string' && value) {
+        this.actoresService.obtenerPorNombre(value).subscribe({
+          next: (res: ActorAutoCompleteDTO[]) => {
+            this.actores = res;
+          },
+          error: (error: HttpErrorResponse) => {
+            console.error(error);
+          },
+        });
+      }
+    });
+  }
 
   onInputChange(event: Event): void {
     const input = (event.target as HTMLInputElement).value.toLowerCase();

@@ -3,7 +3,7 @@
     <div class="peliculas-contenedor">
       @for(pelicula of peliculas; track $index){
       <div class="pelicula-contenedor">
-        <a href="javascript:void(0);">
+        <a [routerLink]="['/' + detalleRoute, pelicula.slug]">
           @if(pelicula.poster){
           <img [src]="pelicula.poster" width="169" height="250" />
           } @else {
@@ -14,12 +14,13 @@
           <p>{{ pelicula.titulo }}</p>
           <div class="flex flex-row">
             <a
-              href="javascript:void(0);"
+              [routerLink]="[editRoute, pelicula.id]"
               class="flex flex-row gap-2 focus:outline-none text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700"
               >Editar</a
             >
             <button
               type="button"
+              (click)="eliminar(pelicula['id'])"
               class="flex flex-row gap-2 focus:outline-none text-white bg-red-700 hover:bg-red-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700"
             >
               Borrar

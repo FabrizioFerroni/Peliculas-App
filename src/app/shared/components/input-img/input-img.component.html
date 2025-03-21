@@ -7,6 +7,15 @@
   <div class="flex justify-center items-center w-full">
     <img [src]="urlImg" alt="Imagen" width="200" class="rounded-md" />
   </div>
+  } @else {
+  <div class="flex justify-center items-center w-full">
+    <img
+      src="/img/default-user.jpg"
+      alt="Imagen"
+      width="200"
+      class="rounded-md"
+    />
+  </div>
   }
 </div>
 <h4>{{ titulo }}</h4>

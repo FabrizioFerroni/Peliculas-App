@@ -72,4 +72,10 @@ export default [
     loadComponent: () =>
       import('./peliculas/editar-pelicula/editar-pelicula.component'),
   },
+
+  {
+    path: Rutas.PELICULA_VER_SLUG,
+    loadComponent: () =>
+      import('./peliculas/pelicula-detalle/pelicula-detalle.component'),
+  },
 ] as Routes;

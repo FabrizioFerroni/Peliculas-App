@@ -33,21 +33,9 @@ import { ActorAutoCompleteDTO } from '@app/features/actores/dto/actores.dto';
 })
 export class FormularioPeliculasComponent {
   @Input()
-  dto?: PeliculaGetDto | null = {
-    id: '',
-    titulo: '',
-    descripcion: '',
-    fechaLanzamiento: null,
-    duracion: 0,
-    anio: '',
-    poster: null,
-    generos: [],
-    enCines: false,
-    proximosEstrenos: false,
-    director: '',
-    actores: [],
-    trailer: '',
-  };
+  dto?: PeliculaGetDto;
+  @Input({ required: true })
+  method: string = 'Crear';
 
   @Output() posteoFormulario = new EventEmitter<PeliculaPostDto>();
   private fb = inject(FormBuilder);
@@ -66,7 +54,15 @@ export class FormularioPeliculasComponent {
 
   ngOnInit() {
     if (this.dto) {
-      this.form.patchValue(this.dto);
+      /* this.form.patchValue(this.dto); */
+      const fechaFormateada = this.dto.fechaLanzamiento
+        ? new Date(this.dto.fechaLanzamiento).toISOString().substring(0, 10)
+        : null;
+
+      this.form.patchValue({
+        ...this.dto,
+        fechaLanzamiento: fechaFormateada,
+      });
     }
   }
 
@@ -77,13 +73,13 @@ export class FormularioPeliculasComponent {
     descripcion: new FormControl<string | null>(null, {
       validators: [Validators.required, firstLetterUppercase()],
     }),
-    fechaLanzamiento: new FormControl<Date | null>(null, {
+    fechaLanzamiento: new FormControl<string | null>(null, {
       validators: [Validators.required],
     }),
     duracion: new FormControl<number | null>(null, {
       validators: [Validators.required, durationNotNegative()],
     }),
-    anio: new FormControl<string | null>(null, {
+    anioLanzamiento: new FormControl<string | null>(null, {
       validators: [Validators.required],
     }),
     poster: new FormControl<File | string | null>(null, {
@@ -112,24 +108,23 @@ export class FormularioPeliculasComponent {
       return;
     }
 
-    const generos: string[] = this.generosSeleccionados.map((s) => s.id);
-    const cines: string[] = this.cinesSeleccionados.map((s) => s.id);
-    // const actores: string[] = this.actoresSeleccionados.map((s) => s.id);
+    const generosIds: string[] = this.generosSeleccionados.map((s) => s.id);
+    const cinesIds: string[] = this.cinesSeleccionados.map((s) => s.id);
 
     const pelicula: PeliculaPostDto = {
       titulo: this.form.value.titulo!,
       descripcion: this.form.value.descripcion!,
       fechaLanzamiento: new Date(this.form.value.fechaLanzamiento!),
       duracion: this.form.value.duracion!,
-      anio: this.form.value.anio!,
+      anioLanzamiento: this.form.value.anioLanzamiento!,
       poster: this.imgOutput,
       enCines: this.form.value.enCines!,
       proximosEstrenos: this.form.value.proximosEstrenos!,
       director: this.form.value.director!,
       actores: this.actoresSeleccionados,
       trailer: this.form.value.trailer!,
-      generos,
-      cines,
+      generosIds,
+      cinesIds,
     };
 
     if (typeof pelicula.poster === 'function') {
@@ -215,7 +210,7 @@ export class FormularioPeliculasComponent {
   }
 
   get getAnioField() {
-    return this.form.get('anio');
+    return this.form.get('anioLanzamiento');
   }
 
   get getAnioFieldErrors(): boolean {

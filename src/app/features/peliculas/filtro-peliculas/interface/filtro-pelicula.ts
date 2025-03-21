@@ -1,7 +1,9 @@
 export interface IFiltroPelicula {
   titulo: string;
-  anio: string;
-  generoId: string;
-  proximosEstrenos: boolean;
+  anioLanzamiento: string;
+  genero: string;
   enCines: boolean;
+  proximosEstrenos: boolean;
+  pagina: number;
+  recordsPorPagina: number;
 }

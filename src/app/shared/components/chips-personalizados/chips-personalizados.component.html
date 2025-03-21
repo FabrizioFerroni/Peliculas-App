@@ -1,0 +1,10 @@
+<div class="flex flex-row">
+  @for (item of data; track $index) {
+  <a
+    [routerLink]="['/peliculas/filtrar']"
+    [queryParams]="{ genero: item?.slug }"
+    class="flex flex-row gap-2 focus:outline-none text-gray-500 bg-transparent border border-gray-600 hover:bg-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-transparent dark:hover:bg-gray-300"
+    >{{ item.nombre }}</a
+  >
+  }
+</div>

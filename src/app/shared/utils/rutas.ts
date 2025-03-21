@@ -25,6 +25,8 @@ export enum Rutas {
 
   PELICULA_EDITAR = 'peliculas/editar/:id',
 
+  PELICULA_VER_SLUG = 'pelicula/:slug',
+
   NOT_FOUND = '**',
 
   OLVIDE_CLAVE = 'olvide-clave',

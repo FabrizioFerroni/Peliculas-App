@@ -1,11 +1,7 @@
-<div
-  class="w-full max-w-sm mx-auto mt-10 p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700"
->
-  <h5 class="text-xl font-medium text-gray-900 dark:text-white mb-6">
-    Editar Género ( <b>{{ id }}</b> )
-  </h5>
-  <app-formulario-genero
-    [dto]="genero"
-    (posteoFormulario)="guardarCambios($event)"
-  />
-</div>
+<app-edit-entities
+  title="Editar Género"
+  titleSing="Género"
+  [routeIndice]="'/' + routeGeneros"
+  [id]="id"
+  [form]="formularioGeneros"
+/>

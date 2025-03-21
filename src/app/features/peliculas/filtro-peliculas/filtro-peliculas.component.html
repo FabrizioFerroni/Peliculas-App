@@ -22,32 +22,32 @@
         />
       </div>
       <div class="mb-5">
-        <label for="anio" class="block mb-2 text-sm font-medium">Año</label>
+        <label for="anioLanzamiento" class="block mb-2 text-sm font-medium"
+          >Año</label
+        >
         <input
           type="text"
           required
-          id="anio"
-          name="anio"
-          formControlName="anio"
+          id="anioLanzamiento"
+          name="anioLanzamiento"
+          formControlName="anioLanzamiento"
           class="block rounded-lg border mb-2 text-sm font-medium text-gray-900 dark:text-white w-full p-2.5"
           placeholder="2022"
         />
       </div>
       <div class="mb-5">
-        <label for="generoId" class="block mb-2 text-sm font-medium"
+        <label for="genero" class="block mb-2 text-sm font-medium"
           >Género</label
         >
         <select
-          id="generoId"
-          name="generoId"
-          formControlName="generoId"
+          id="genero"
+          name="genero"
+          formControlName="genero"
           class="block rounded-lg border mb-2 text-sm font-medium text-gray-900 dark:text-white w-full p-2.5"
         >
-          <option selected disabled hidden value="">
-            Selecciona un género
-          </option>
+          <option selected value="">Selecciona un género</option>
           @for (item of generos; track $index) {
-          <option value="{{ item.id }}">{{ item.nombre }}</option>
+          <option value="{{ item.slug }}">{{ item.nombre }}</option>
           }
         </select>
       </div>
@@ -86,7 +86,6 @@
       <div class="flex flex-col justify-between items-center">
         <button
           type="button"
-          [disabled]="form.invalid"
           (click)="limpiar()"
           class="w-full justify-center items-center flex flex-row gap-2 focus:outline-none text-white bg-yellow-700 hover:bg-yellow-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-yellow-600 dark:hover:bg-yellow-700"
         >
@@ -96,7 +95,40 @@
     </form>
   </div>
 
+  @if(!isLoading){
   <div class="flex-grow p-4 sm:px-6 md:px-8">
     <app-listado-peliculas [peliculas]="peliculas"></app-listado-peliculas>
+    <!-- Pagination -->
+    <app-paginado
+      *ngIf="!isLoading"
+      [showCantPages]="false"
+      [content]="peliculas"
+      [page]="page"
+      [size]="size"
+      [totalElements]="totalElements"
+      [currentPage]="currentPage"
+      [totalPages]="totalPages"
+      [maxVisiblePages]="maxVisiblePages"
+      [isFirst]="isFirst"
+      [isLast]="isLast"
+      [isFirstPage]="isFirstPage"
+      [isLastPage]="isLastPage"
+      (firstPage)="First()"
+      (rewind)="rewind()"
+      (forward)="forward()"
+      (lastPage)="Last()"
+      (setPage)="setPage($event)"
+    />
+    <!-- Fin Pagination -->
   </div>
+  } @else {
+  <div class="flex-grow text-center">
+    <div class="flex items-center justify-center m-0 p-0">
+      <app-cargando [width]="350" [height]="350" />
+    </div>
+    <p class="p-0 m-0 text-xl font-medium text-gray-900 dark:text-white">
+      Cargando peliculas...
+    </p>
+  </div>
+  }
 </div>

@@ -130,7 +130,7 @@
 
   <div class="mb-5">
     <label
-      for="anio"
+      for="anioLanzamiento"
       class="block mb-2 text-sm font-medium {{
         getAnioFieldRequiredError ? ' text-red-700 dark:text-red-500' : ''
       }}"
@@ -139,9 +139,9 @@
     <input
       type="text"
       required
-      id="anio"
-      name="anio"
-      formControlName="anio"
+      id="anioLanzamiento"
+      name="anioLanzamiento"
+      formControlName="anioLanzamiento"
       class="block rounded-lg border mb-2 text-sm font-medium text-gray-900 dark:text-white w-full p-2.5 {{
         getAnioFieldRequiredError
           ? 'border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500  focus:border-red-500 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500'
@@ -200,7 +200,6 @@
       id="fechaLanzamiento"
       name="fechaLanzamiento"
       formControlName="fechaLanzamiento"
-      [value]="dto?.fechaLanzamiento"
       class="block rounded-lg border mb-2 text-sm font-medium text-gray-900 dark:text-white w-full p-2.5 {{
         getFechaLanzamientoFieldRequiredError ||
         getFechaLanzamientoFieldDateDoNotFutureError
@@ -312,7 +311,7 @@
       type="submit"
       [disabled]="form.invalid"
     >
-      @if(dto?.titulo !== ''){ Editar película } @else { Crear película }
+      @if(method !== 'Crear'){ Editar película } @else { Crear película }
     </button>
     <a
       class="flex flex-row gap-2 focus:outline-none text-white bg-gray-700 hover:bg-gray-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700"

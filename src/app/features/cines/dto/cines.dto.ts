@@ -1,8 +1,8 @@
 export interface CineGetDto {
   id: string;
   nombre: string;
-  latitud?: number | null;
-  longitud?: number | null;
+  latitud: number;
+  longitud: number;
 }
 
 export interface CinePostDto {
