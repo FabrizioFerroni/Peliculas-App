@@ -2,10 +2,13 @@
   class="w-full max-w-lg mx-auto mt-10 p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700"
 >
   <h5 class="text-xl font-medium text-gray-900 dark:text-white mb-6">
-    Editar Película: <b>{{ id }}</b>
+    Editar Película
   </h5>
+  @if(peliculaDto){
+  <app-mostrar-errores [errores]="errores" />
   <app-formulario-peliculas
-    [dto]="pelicula"
+    [method]="'Editar'"
+    [dto]="peliculaDto"
     (posteoFormulario)="guardarCambios($event)"
     [generosNoSeleccionados]="generosNoSeleccionados"
     [generosSeleccionados]="generosSeleccionados"
@@ -13,4 +16,7 @@
     [cinesNoSeleccionados]="cinesNoSeleccionados"
     [actoresSeleccionados]="actoresSeleccionados"
   />
+  } @else {
+  <app-cargando />
+  }
 </div>

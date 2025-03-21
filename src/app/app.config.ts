@@ -8,7 +8,11 @@ import {
   withComponentInputBinding,
   withInMemoryScrolling,
 } from '@angular/router';
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import {
+  provideHttpClient,
+  withFetch,
+  withInterceptors,
+} from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { routes } from './app.routes';
 
@@ -25,7 +29,7 @@ export const appConfig: ApplicationConfig = {
       })
     ),
     provideAnimations(),
-    provideHttpClient(withInterceptors([])),
+    provideHttpClient(withInterceptors([]), withFetch()),
     ReactiveFormsModule,
   ],
 };

@@ -32,3 +32,12 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+.indice-elementos {
+  margin-top: 1rem;
+
+  a {
+    margin-right: 1rem;
+    text-decoration: none;
+  }
+}

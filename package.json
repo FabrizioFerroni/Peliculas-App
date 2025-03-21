@@ -1,12 +1,20 @@
 {
   "name": "peliculas-app",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "start": "npm run start:dev",
+    "build": "npm run build:prod",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "start:dev": "ng serve --c=development",
+    "start:dev:o": "ng serve --c=development -o",
+    "build:dev": "ng build --c=development",
+    "start:prod": "ng serve --c=production",
+    "start:prod:o": "ng serve --c=production -o",
+    "build:prod": "ng build --c=production",
+    "lint": "ng lint",
+    "prepare": "husky install"
   },
   "private": true,
   "dependencies": {
@@ -22,7 +30,9 @@
     "@bluehalo/ngx-leaflet": "^18.0.2",
     "flowbite": "^2.5.2",
     "leaflet": "^1.9.4",
+    "ng-angular-popup": "^0.6.6",
     "rxjs": "~7.8.0",
+    "sweetalert2": "^11.15.10",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.10"
   },

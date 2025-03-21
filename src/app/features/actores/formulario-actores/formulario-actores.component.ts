@@ -29,18 +29,22 @@ export class FormularioActoresComponent {
     fechaNacimiento: null,
     foto: '',
   };
-  @Output() posteoActor = new EventEmitter<ActoresPostDto>();
+  @Output() posteoFormulario = new EventEmitter<ActoresPostDto>();
   private fb = inject(FormBuilder);
   actorRoute: string = Rutas.ACTORES;
   imgOutput: File | null = File as unknown as File;
 
   ngOnInit() {
     if (this.dto) {
+      const fechaNacimiento =
+        this.dto.fechaNacimiento instanceof Date
+          ? this.dto.fechaNacimiento.toISOString().split('T')[0]
+          : this.dto.fechaNacimiento
+          ? new Date(this.dto.fechaNacimiento).toISOString().split('T')[0]
+          : null;
       const formValue = {
         ...this.dto,
-        fechaNacimiento: this.dto.fechaNacimiento
-          ? this.dto.fechaNacimiento.toISOString().split('T')[0]
-          : null,
+        fechaNacimiento,
         foto: this.dto.foto ? new File([], this.dto.foto) : null,
       };
       this.form.patchValue(formValue);
@@ -130,6 +134,6 @@ export class FormularioActoresComponent {
       actor.foto = null;
     }
 
-    this.posteoActor.emit(actor);
+    this.posteoFormulario.emit(actor);
   }
 }

@@ -10,5 +10,5 @@ import { IPelicula } from '@app/shared/types/peliculas.interface';
 })
 export class ListadoGenericosComponent {
   @Input({ required: true })
-  listado!: IPelicula[];
+  listado!: any[];
 }

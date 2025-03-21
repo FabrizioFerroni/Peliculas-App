@@ -26,9 +26,16 @@ export class MapaComponent implements OnInit {
         this.markerOptions
       );
 
+      if (valor.texto) {
+        marcador.bindPopup(valor.texto, { autoClose: false, autoPan: false });
+      }
+
       return marcador;
     });
   }
+
+  @Input()
+  soloLectura = false;
 
   @Input()
   coordenadasIniciales: ICoordenadas[] = [];
@@ -45,7 +52,7 @@ export class MapaComponent implements OnInit {
       }),
     ],
     zoom: 14,
-    center: latLng(40.702897267645426, -73.69643144060487),
+    center: latLng(18.47318704338643, -69.93441088477327), //latLng(40.702897267645426, -73.69643144060487),
   };
 
   markerOptions: MarkerOptions = {
@@ -61,6 +68,10 @@ export class MapaComponent implements OnInit {
   capas: Marker<any>[] = [];
 
   manejarClick(event: LeafletMouseEvent) {
+    if (this.soloLectura) {
+      return;
+    }
+
     const latitud = event.latlng.lat;
     const longitud = event.latlng.lng;
 

@@ -1,36 +1,34 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
-import { GeneroGetDto, GeneroPostDto } from '../dto/generos.dto';
 import { FormularioGeneroComponent } from '../formulario-genero/formulario-genero.component';
-import { Router } from '@angular/router';
+import { GenerosService } from '../service/generos.service';
+import { UtilsService } from '@app/shared/services/utils.service';
+import { SERVICIO_CRUD_TOKEN } from '@app/shared/providers/provider';
+import { Rutas } from '@app/shared/utils/rutas';
+import { EditEntitiesComponent } from '@app/shared/components/edit-entities/edit-entities.component';
 
 @Component({
   selector: 'app-editar-genero',
   standalone: true,
-  imports: [FormularioGeneroComponent],
+  imports: [EditEntitiesComponent],
+  providers: [
+    {
+      provide: SERVICIO_CRUD_TOKEN,
+      useClass: GenerosService,
+    },
+  ],
   templateUrl: './editar-genero.component.html',
   styleUrl: './editar-genero.component.scss',
 })
 export default class EditarGeneroComponent implements OnInit {
+  private readonly utilsService = inject(UtilsService);
   @Input()
   id: string = '';
 
-  private router: Router = inject(Router);
+  readonly routeGeneros: string = Rutas.GENEROS;
 
-  genero: GeneroGetDto = {
-    id: this.id,
-    nombre: 'Acción',
-  };
+  formularioGeneros = FormularioGeneroComponent;
 
   ngOnInit(): void {
-    console.log(`Genero init: ${JSON.stringify(this.genero)}`);
-  }
-
-  guardarCambios(genero: GeneroPostDto): void {
-    // Realizar las acciones de guardado y redireccionar al listado de generos
-    console.log(genero);
-    //this.generoService.actualizarGenero(genero).subscribe(() => {
-    //  this.router.navigate([`/${Rutas.GENEROS}`]);
-    //}
-    //this.router.navigate([`/${Rutas.GENEROS}`]);
+    this.utilsService.setTitle('Editar Género');
   }
 }

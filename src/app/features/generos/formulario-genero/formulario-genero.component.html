@@ -3,7 +3,9 @@
     <label
       for="nombre"
       class="block mb-2 text-sm font-medium {{
-        getNombreFieldRequiredError || getNombreFieldFirstLetterUppercaseError
+        getNombreFieldRequiredError ||
+        getNombreFieldFirstLetterUppercaseError ||
+        getNombreFieldMaxLengthError
           ? ' text-red-700 dark:text-red-500'
           : ''
       }}"
@@ -16,7 +18,9 @@
       name="nombre"
       formControlName="nombre"
       class="block rounded-lg border mb-2 text-sm font-medium text-gray-900 dark:text-white w-full p-2.5 {{
-        getNombreFieldRequiredError || getNombreFieldFirstLetterUppercaseError
+        getNombreFieldRequiredError ||
+        getNombreFieldFirstLetterUppercaseError ||
+        getNombreFieldMaxLengthError
           ? 'border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500  focus:border-red-500 dark:text-red-500 dark:placeholder-red-500 dark:border-red-500'
           : ''
       }}"
@@ -31,7 +35,11 @@
     <p class="mt-2 text-sm text-red-600 dark:text-red-500">
       La primera letra del nombre del género tiene que ir en mayúscula
     </p>
-    }}
+    } @if(getNombreFieldMaxLengthError){
+    <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+      El campo nombre no puede tener más de {{ maxLengthError }} caracteres
+    </p>
+    } }
   </div>
   <div class="flex flex-col-reverse md:flex-row-reverse justify-between">
     <button

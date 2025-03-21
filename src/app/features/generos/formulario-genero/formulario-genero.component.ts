@@ -14,7 +14,7 @@ import { GeneroGetDto, GeneroPostDto } from '../dto/generos.dto';
 })
 export class FormularioGeneroComponent {
   @Input({ required: false })
-  dto?: GeneroGetDto | null = { id: '', nombre: '' };
+  dto?: GeneroGetDto | null = { id: '', nombre: '', slug: '' };
   @Output() posteoFormulario = new EventEmitter<GeneroPostDto>();
   private fb = inject(FormBuilder);
   generoRoute: string = Rutas.GENEROS;
@@ -26,7 +26,16 @@ export class FormularioGeneroComponent {
   }
 
   form = this.fb.group({
-    nombre: ['', { validators: [Validators.required, firstLetterUppercase()] }],
+    nombre: [
+      '',
+      {
+        validators: [
+          Validators.required,
+          firstLetterUppercase(),
+          Validators.maxLength(50),
+        ],
+      },
+    ],
   });
 
   get getNombreField() {
@@ -52,6 +61,17 @@ export class FormularioGeneroComponent {
       this.getNombreField?.hasError('firstLetterUppercase')! &&
       (this.getNombreField?.dirty || this.getNombreField?.touched)!
     );
+  }
+
+  get getNombreFieldMaxLengthError(): boolean {
+    return (
+      this.getNombreField?.hasError('maxlength')! &&
+      (this.getNombreField?.dirty || this.getNombreField?.touched)!
+    );
+  }
+
+  get maxLengthError(): number {
+    return this.getNombreField?.getError('maxlength')?.requiredLength!;
   }
 
   guardarCambios() {

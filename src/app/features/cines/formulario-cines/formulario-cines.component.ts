@@ -24,8 +24,8 @@ export class FormularioCinesComponent {
   dto?: CineGetDto | null = {
     id: '',
     nombre: '',
-    latitud: null,
-    longitud: null,
+    latitud: 0,
+    longitud: 0,
   };
   @Output() posteoFormulario = new EventEmitter<CinePostDto>();
   private fb = inject(FormBuilder);
@@ -34,10 +34,10 @@ export class FormularioCinesComponent {
 
   form = this.fb.group({
     nombre: ['', { validators: [Validators.required, firstLetterUppercase()] }],
-    latitud: new FormControl<number | null>(null, {
+    latitud: new FormControl<number>(0, {
       validators: [Validators.required],
     }),
-    longitud: new FormControl<number | null>(null, {
+    longitud: new FormControl<number>(0, {
       validators: [Validators.required],
     }),
   });
