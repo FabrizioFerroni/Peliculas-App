@@ -40,4 +40,10 @@ export enum Rutas {
   REGISTER = 'registrarse',
 
   APP = 'app',
+
+  USUARIOS = 'usuarios',
+
+  USUARIO_EDITAR = 'usuarios/editar/:id',
+
+  USUARIO_NUEVO = 'usuarios/crear',
 }

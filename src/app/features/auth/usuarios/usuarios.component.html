@@ -1,0 +1,241 @@
+<div class="container mx-auto my-8">
+  <div class="mx-4">
+    <div class="flex justify-between items-center pt-4">
+      <h2 class="text-4xl font-bold dark:text-white">Usuarios</h2>
+      <button
+        class="flex flex-row gap-2 focus:outline-none text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700"
+        routerLink="/{{ newUsuarioRoute }}"
+      >
+        Crear nuevo
+      </button>
+    </div>
+    <!-- aca va el listado -->
+    <app-listado-genericos [listado]="usuarios">
+      <ng-container contenido>
+        <div
+          class="flex mb-2 flex-col md:flex-row gap-3 md:gap-0 items-center {{
+            usuarios.length < 1 ? 'justify-end' : 'justify-between'
+          }}"
+        >
+          <div
+            class="flex items-center gap-2"
+            *ngIf="usuarios.length >= 1 && !isLoading"
+          >
+            Mostrar
+            <div class="flex items-center justify-center gap-2">
+              <select
+                class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                aria-label="Default select example"
+                (change)="changeSize($event)"
+                *ngIf="usuarios.length >= 1"
+              >
+                <ng-container *ngFor="let pageSize of pageSizes">
+                  <option
+                    [selected]="getCurrentPageSize() === pageSize"
+                    [value]="pageSize"
+                  >
+                    {{ pageSize === totalElements ? "Todos" : pageSize }}
+                  </option>
+                </ng-container>
+                <option [selected]="size === totalElements" value="total">
+                  Todos
+                </option>
+              </select>
+            </div>
+            registro(s) por pagina
+          </div>
+          <!-- class="d-flex flex-column flex-md-row justify-content-center align-items-center gap-4" -->
+          <div
+            class="flex flex-col md:flex-row justify-center items-center gap-4"
+            *ngIf="!isLoading"
+          >
+            <div
+              id="example_filter"
+              class="dataTables_filter d-flex justify-center items-center gap-2"
+            >
+              <label
+                for="default-search"
+                class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
+                >Search</label
+              >
+              <div class="relative">
+                <div
+                  class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
+                >
+                  <svg
+                    class="w-4 h-4 text-gray-500 dark:text-gray-400"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                    />
+                  </svg>
+                </div>
+                <input
+                  type="search"
+                  id="default-search"
+                  class="block w-full p-2.5 ps-10 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="Buscar {{ 'usuario' | lowercase }}..."
+                  (search)="handleSearch()"
+                  (keyup)="onSearch($event)"
+                  disabled
+                />
+              </div>
+            </div>
+
+            @if(usuarios.length >= 1) {
+
+            <button
+              id="dropdownDefaultButton"
+              data-dropdown-toggle="dropdown"
+              class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700"
+              type="button"
+            >
+              Exportar
+              <svg
+                class="w-2.5 h-2.5 ms-3"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 10 6"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="m1 1 4 4 4-4"
+                />
+              </svg>
+            </button>
+
+            <!-- Dropdown menu -->
+            <div
+              id="dropdown"
+              class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700"
+            >
+              <ul
+                class="py-2 text-sm text-gray-700 dark:text-gray-200"
+                aria-labelledby="dropdownDefaultButton"
+              >
+                <li>
+                  <a
+                    href="#"
+                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                    >CSV</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                    >Excel</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                    >Imprimir</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                    >PDF</a
+                  >
+                </li>
+              </ul>
+            </div>
+
+            }
+          </div>
+        </div>
+        <div
+          class="relative overflow-x-auto shadow-md sm:rounded-lg indice-elementos"
+        >
+          <table
+            class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+          >
+            <thead
+              class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+            >
+              <tr>
+                <th class="px-6 py-3">Email</th>
+                <th class="px-6 py-3">Nombre de usuario</th>
+
+                <th class="px-6 py-3"><span class="sr-only">Acciones</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              @for(item of usuarios; track $index){
+              <tr
+                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600"
+              >
+                <td
+                  class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                >
+                  {{ item["email"] }}
+                </td>
+                <td
+                  class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                >
+                  {{ item["username"] }}
+                </td>
+                <!-- Acciones -->
+                <td class="px-6 py-4 text-right">
+                  <div class="flex justify-end">
+                    <button
+                      type="button"
+                      (click)="hacerAdmin(item['email'])"
+                      class="flex flex-row gap-2 focus:outline-none text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700"
+                    >
+                      Hacer admin
+                    </button>
+                    <button
+                      type="button"
+                      (click)="eliminarRol(item['email'])"
+                      class="flex flex-row gap-2 focus:outline-none text-white bg-red-700 hover:bg-red-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700"
+                    >
+                      Quitar admin
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+        <!-- Pagination -->
+        <app-paginado
+          *ngIf="!isLoading"
+          [content]="usuarios"
+          [page]="page"
+          [size]="size"
+          [totalElements]="totalElements"
+          [currentPage]="currentPage"
+          [totalPages]="totalPages"
+          [maxVisiblePages]="maxVisiblePages"
+          [isFirst]="isFirst"
+          [isLast]="isLast"
+          [isFirstPage]="isFirstPage"
+          [isLastPage]="isLastPage"
+          (firstPage)="First()"
+          (rewind)="rewind()"
+          (forward)="forward()"
+          (lastPage)="Last()"
+          (setPage)="setPage($event)"
+        />
+        <!-- Fin Pagination -->
+      </ng-container>
+    </app-listado-genericos>
+  </div>
+</div>

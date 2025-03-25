@@ -13,11 +13,12 @@ import { RouterLink } from '@angular/router';
 import swal from 'sweetalert2';
 import { HttpErrorResponse } from '@angular/common/http';
 import { PeliculasService } from '../service/peliculas.service';
+import { AuthorizedComponent } from '../../auth/authorized/authorized.component';
 
 @Component({
   selector: 'app-listado-peliculas',
   standalone: true,
-  imports: [ListadoGenericosComponent, RouterLink],
+  imports: [ListadoGenericosComponent, RouterLink, AuthorizedComponent],
   templateUrl: './listado-peliculas.component.html',
   styleUrl: './listado-peliculas.component.scss',
 })

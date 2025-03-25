@@ -10,6 +10,11 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ICoordenadas } from '@app/shared/components/mapa/interfaces/coordenada';
 import { MapaComponent } from '../../../shared/components/mapa/mapa.component';
 import { MinuteToHourPipe } from '@app/shared/pipes/minute-to-hour.pipe';
+import { RatingService } from '@app/shared/services/rating.service';
+import { ToastType } from 'ng-angular-popup';
+import { NotificationUtils } from '@app/shared/utils/show-toast';
+import { AuthService } from '@app/features/auth/service/auth.service';
+import { RatingComponent } from '@app/shared/components/rating/rating.component';
 
 @Component({
   selector: 'app-pelicula-detalle',
@@ -20,7 +25,9 @@ import { MinuteToHourPipe } from '@app/shared/pipes/minute-to-hour.pipe';
     DatePipe,
     MapaComponent,
     MinuteToHourPipe,
+    RatingComponent,
   ],
+  providers: [RatingService, AuthService],
   templateUrl: './pelicula-detalle.component.html',
   styleUrl: './pelicula-detalle.component.scss',
 })
@@ -36,11 +43,13 @@ export default class PeliculaDetalleComponent implements OnInit {
 
   peliculaService = inject(PeliculasService);
   private readonly utilsService = inject(UtilsService);
+  private readonly ratingService = inject(RatingService);
+  private readonly authService = inject(AuthService);
   private readonly sanitizer = inject(DomSanitizer);
+  private readonly notif = inject(NotificationUtils);
   ngOnInit(): void {
     this.peliculaService.obtenerPorSlug(this.slug).subscribe({
       next: (pelicula: PeliculaDetalleDto) => {
-        console.log(pelicula.generos[0].slug);
         this.pelicula = pelicula;
         this.utilsService.setTitle(pelicula.titulo ? pelicula.titulo : '');
         this.trailerUrl = this.generateUrlYTEmbed(pelicula.trailer);
@@ -68,5 +77,26 @@ export default class PeliculaDetalleComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustResourceUrl(
       `https://www.youtube.com/embed/${videoId}`
     );
+  }
+
+  puntuar(puntuacion: number) {
+    if (!this.authService.isLogged()) {
+      this.notif.toastMsg(
+        ToastType.WARNING,
+        'Debes loguearte para poder votar por una película',
+        'Advertencia',
+        5000
+      );
+      return;
+    }
+
+    this.ratingService.puntuar(this.pelicula!.id, puntuacion).subscribe(() => {
+      this.notif.toastMsg(
+        ToastType.SUCCESS,
+        `Su voto ha sido recibido`,
+        'Éxito!',
+        5000
+      );
+    });
   }
 }
