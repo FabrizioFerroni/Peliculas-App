@@ -65,49 +65,106 @@
           >
         </li>
 
-        <li>
-          <!--  -->
-          <a
-            routerLink="{{ generosRoute }}"
-            routerLinkActive="active"
-            class="block py-2 px-3 text-gray-900 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 active:border-b active:border-b-blue-700 md:active:border-b-blue-700 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
-            aria-current="page"
-            >Géneros</a
-          >
-        </li>
+        <!-- auth -->
+        <app-authorized
+          rol="admin"
+          class="flex flex-col mt-4 font-medium md:flex-row md:mt-0 md:space-x-8 rtl:space-x-reverse"
+        >
+          <ng-container authorized>
+            <li>
+              <!--  -->
+              <a
+                routerLink="{{ generosRoute }}"
+                routerLinkActive="active"
+                class="block py-2 px-3 text-gray-900 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 active:border-b active:border-b-blue-700 md:active:border-b-blue-700 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
+                aria-current="page"
+                >Géneros</a
+              >
+            </li>
 
-        <li>
-          <!--  -->
-          <a
-            routerLink="{{ actoresRoute }}"
-            routerLinkActive="active"
-            class="block py-2 px-3 text-gray-900 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 active:border-b active:border-b-blue-700 md:active:border-b-blue-700 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
-            aria-current="page"
-            >Actores</a
-          >
-        </li>
+            <li>
+              <!--  -->
+              <a
+                routerLink="{{ actoresRoute }}"
+                routerLinkActive="active"
+                class="block py-2 px-3 text-gray-900 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 active:border-b active:border-b-blue-700 md:active:border-b-blue-700 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
+                aria-current="page"
+                >Actores</a
+              >
+            </li>
 
-        <li>
-          <!--  -->
-          <a
-            routerLink="{{ cinesRoute }}"
-            routerLinkActive="active"
-            class="block py-2 px-3 text-gray-900 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 active:border-b active:border-b-blue-700 md:active:border-b-blue-700 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
-            aria-current="page"
-            >Cines</a
-          >
-        </li>
+            <li>
+              <!--  -->
+              <a
+                routerLink="{{ cinesRoute }}"
+                routerLinkActive="active"
+                class="block py-2 px-3 text-gray-900 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 active:border-b active:border-b-blue-700 md:active:border-b-blue-700 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
+                aria-current="page"
+                >Cines</a
+              >
+            </li>
 
-        <li>
-          <!--  -->
-          <a
-            routerLink="{{ crearPeliculasRoute }}"
-            routerLinkActive="active"
-            class="block py-2 px-3 text-gray-900 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 active:border-b active:border-b-blue-700 md:active:border-b-blue-700 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
-            aria-current="page"
-            >Crear Pelicula</a
-          >
-        </li>
+            <li>
+              <!--  -->
+              <a
+                routerLink="{{ usuariosRoute }}"
+                routerLinkActive="active"
+                class="block py-2 px-3 text-gray-900 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 active:border-b active:border-b-blue-700 md:active:border-b-blue-700 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
+                aria-current="page"
+                >Usuarios</a
+              >
+            </li>
+
+            <li>
+              <!--  -->
+              <a
+                routerLink="{{ crearPeliculasRoute }}"
+                routerLinkActive="active"
+                class="block py-2 px-3 text-gray-900 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 active:border-b active:border-b-blue-700 md:active:border-b-blue-700 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
+                aria-current="page"
+                >Crear Pelicula</a
+              >
+            </li>
+          </ng-container>
+        </app-authorized>
+        <!-- fin auth -->
+
+        <!-- <div class="espacio"></div> -->
+        <app-authorized
+          class="flex flex-col mt-4 font-medium md:flex-row md:mt-0 md:space-x-8"
+        >
+          <!-- md:space-x-8 rtl:space-x-reverse -->
+          <!-- style="display: inline" -->
+          <ng-container authorized>
+            <span
+              class="block py-2 px-3 text-gray-900 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 active:border-b active:border-b-blue-700 md:active:border-b-blue-700 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
+              >Hola, {{ authService.obtenerCampoJWT("username") }}</span
+            >
+            <a href="javascript:void(0);" (click)="authService.logout()"
+              >Cerrar Sesion</a
+            >
+          </ng-container>
+          <ng-container unauthorized>
+            <li>
+              <a
+                routerLink="{{ loginRoute }}"
+                routerLinkActive="active"
+                class="block py-2 px-3 text-gray-900 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 active:border-b active:border-b-blue-700 md:active:border-b-blue-700 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
+                aria-current="page"
+                >Log In</a
+              >
+            </li>
+            <li>
+              <a
+                routerLink="{{ registerRoute }}"
+                routerLinkActive="active"
+                class="block py-2 px-3 text-gray-900 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 active:border-b active:border-b-blue-700 md:active:border-b-blue-700 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700"
+                aria-current="page"
+                >Sign Up</a
+              >
+            </li>
+          </ng-container>
+        </app-authorized>
       </ul>
       <!-- data-tooltip-target="tooltip-toggle" -->
       <button

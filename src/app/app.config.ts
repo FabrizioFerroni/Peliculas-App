@@ -15,6 +15,7 @@ import {
 } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { routes } from './app.routes';
+import { authInterceptor } from './core/interceptors/token-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -29,7 +30,7 @@ export const appConfig: ApplicationConfig = {
       })
     ),
     provideAnimations(),
-    provideHttpClient(withInterceptors([]), withFetch()),
+    provideHttpClient(withInterceptors([authInterceptor]), withFetch()),
     ReactiveFormsModule,
   ],
 };

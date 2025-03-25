@@ -23,3 +23,13 @@ export function extraerErrores(obj: any): string[] {
 
   return mensajesDeError;
 }
+
+export function extraerErroresIdentity(obj: any): string[] {
+  let mensajesDeError: string[] = [];
+
+  for (let i = 0; i < obj.errors.length; i++) {
+    mensajesDeError.push(obj.errors[i].description);
+  }
+
+  return mensajesDeError;
+}

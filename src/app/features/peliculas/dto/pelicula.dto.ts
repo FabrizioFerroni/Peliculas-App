@@ -15,6 +15,8 @@ export interface PeliculaGetDto {
   enCines: boolean;
   proximosEstrenos: boolean;
   director: string;
+  votoUsuario: number;
+  promedioVoto: number;
 }
 
 export interface PeliculaDetalleDto {
@@ -33,6 +35,8 @@ export interface PeliculaDetalleDto {
   generos: GeneroGetDto[];
   cines: CineGetDto[];
   actores: ActorAutoCompleteDTO[];
+  votoUsuario: number;
+  promedioVoto: number;
 }
 
 export interface PeliculaPostDto {
@@ -75,14 +79,4 @@ export interface PeliculaGetPutDto {
   cineSeleccionados: CineGetDto[];
   cineNoSeleccionados: CineGetDto[];
   actores: ActorAutoCompleteDTO[];
-}
-
-export interface PeliculaFilterDto {
-  pagina?: number;
-  recordsPorPagina?: number;
-  titulo?: string;
-  anioLanzamiento?: string;
-  genero?: string;
-  enCines?: boolean;
-  proximosEstrenos?: boolean;
 }

@@ -14,7 +14,13 @@
       />
       Lanzamiento: {{ pelicula.fechaLanzamiento | date : "dd/MM/yyyy" }} |
       Director: {{ pelicula.director }} | Duración:
-      {{ pelicula.duracion | minuteToHour }} | Promedio: 0.0 | Tu voto: 0.0
+      {{ pelicula.duracion | minuteToHour }} | Promedio:
+      {{ pelicula.promedioVoto.toFixed(1) }} | Tu voto:
+      <app-rating
+        [maximoRating]="5"
+        (ratingCambiado)="puntuar($event)"
+        [ratingSeleccionado]="pelicula.votoUsuario"
+      />
     </div>
 
     <div class="mt-5 flex flex-row gap-3 items-center">
@@ -76,5 +82,10 @@
   </div>
 </div>
 } @else {
-<app-cargando />
+<div class="flex flex-col justify-center items-center">
+  <app-cargando [width]="500" [height]="500" />
+  <p class="text-xl font-medium text-gray-900 dark:text-white">
+    Cargando pelicula...
+  </p>
+</div>
 }
